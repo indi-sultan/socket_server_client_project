@@ -1,0 +1,16 @@
+# Ignore build outputs
+/build/
+# Ignore binaries
+/bin/
+# Ignore CMake cache files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+# Ignore editor and system junk
+*.log
+*.swp
+*.DS_Store
+.vscode/
+.idea/
+errorLog.txt
