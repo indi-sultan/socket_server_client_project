@@ -11,5 +11,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 
 #add subdirectories
+add_subdirectory(src/common)
 add_subdirectory(src/client)
 add_subdirectory(src/server)

@@ -10,3 +10,5 @@ target_link_libraries(server PRIVATE Boost::system)
 
 
 target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/include)
+
+target_link_libraries(server PRIVATE common)
