@@ -1,0 +1,30 @@
+@startuml sequenceDiagram
+
+Client -> ConnectionManager: connect()
+ConnectionManager -> Server: TCP connection established
+Client -> FileSender: sendFile("song.mp3")
+FileSender -> Encryptor: encrypt(chunk)
+Encryptor --> FileSender: encrypted_chunk
+
+FileSender -> ChecksumGenerator: calculate sha256
+ChecksumGenerator --> FileSender: checksum
+
+FileSender -> ConnectionManager: send(metadata + checksum)
+ConnectionManager -> Server: metadata + checksum
+
+loop For each chunk
+    FileSender -> ConnectionManager: send(encrypted_chunk)
+    ConnectionManager -> Server: encrypted_chunk
+end
+
+Server -> SessionHandler: handleClient()
+SessionHandler -> FileReceiver: receiveFile()
+FileReceiver -> Decryptor: decrypt(chunk)
+Decryptor --> FileReceiver: decrypted_chunk
+
+FileReceiver -> ChecksumValidator: verifyChecksum()
+ChecksumValidator --> Server: OK/FAIL
+
+Server -> Client: upload successful
+
+@enduml

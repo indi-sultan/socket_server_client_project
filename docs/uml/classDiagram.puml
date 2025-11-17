@@ -1,0 +1,47 @@
+@startuml classDiagram
+
+class ConnectionManager {
+    +connect(server_ip, port)
+    +disconnect()
+    +send(data)
+    +receive()
+}
+
+class FileSender {
+    +sendFile(filepath)
+}
+
+class Encryptor {
+    +encrypt(data)
+}
+
+class ChecksumGenerator {
+    +sha256(file)
+}
+
+class SessionHandler {
+    +start()
+    +handleClient()
+}
+
+class FileReceiver {
+    +receiveFile()
+}
+
+class Decryptor {
+    +decrypt(data)
+}
+
+class ChecksumValidator {
+    +verifyChecksum(file, checksum)
+}
+
+ConnectionManager --> FileSender
+FileSender --> Encryptor
+FileSender --> ChecksumGenerator
+
+SessionHandler --> FileReceiver
+FileReceiver --> Decryptor
+FileReceiver --> ChecksumValidator
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml socket_architecture
+
+package "Client Application" as ClientApp {
+    [ClientMain]
+    [ConnectionManager]
+    [Encryptor]
+    [FileSender]
+    [ChecksumGenerator]
+}
+
+package "Server Application" as ServerApp {
+    [ServerMain]
+    [SessionHandler]
+    [Decryptor]
+    [FileReceiver]
+    [ChecksumValidator]
+}
+
+package "Common" as Common {
+    [Message]
+    [Protocol]
+}
+
+[ClientMain] --> [ConnectionManager]
+[ConnectionManager] --> [FileSender]
+[FileSender] --> [Encryptor]
+[FileSender] --> [ChecksumGenerator]
+
+[ServerMain] --> [SessionHandler]
+[SessionHandler] --> [FileReceiver]
+[FileReceiver] --> [Decryptor]
+[FileReceiver] --> [ChecksumValidator]
+
+ClientApp --> Common
+ServerApp --> Common
+
+@enduml socket_architecture
