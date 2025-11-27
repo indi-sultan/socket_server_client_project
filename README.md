@@ -56,4 +56,12 @@ cd build/bin
 **Shivam Kumar**  
 C/C++ | Systems Programming | Linux & Embedded Enthusiast
 
+---
+
+### 📄 License
+
+This project is open-source under the MIT License.  
+See the LICENSE file for more details.
+
+
 
