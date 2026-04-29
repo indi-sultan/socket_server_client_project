@@ -1,5 +1,5 @@
 add_executable(server 
-main.cpp
+main.cpp server.cpp
 )
 
 # Find Boost libraries (header-only + system)
