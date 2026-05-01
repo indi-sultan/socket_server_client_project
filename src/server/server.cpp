@@ -12,8 +12,9 @@ Server::Server(boost::asio::io_context& io_context, int port)
 void Server::start() {
     std::cout << "[Server] Listening...\n";
 
-    while (true) {
-        tcp::socket socket(acceptor_.get_executor());
+    while (running_) 
+    {
+        boost::asio::ip::tcp::socket socket(acceptor_.get_executor());
 
         acceptor_.accept(socket);
         std::cout << "[Server] Client connected\n";
@@ -21,6 +22,12 @@ void Server::start() {
         // Handle each client in separate thread (temporary for Stage 1)
         std::thread(&Server::handleClient, this, std::move(socket)).detach();
     }
+}
+
+void Server::stop()
+{
+    running_ = false;
+    acceptor_.close();
 }
 
 void Server::handleClient(tcp::socket socket) {
