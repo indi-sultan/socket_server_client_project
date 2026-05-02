@@ -1,14 +1,22 @@
-add_executable(server 
-main.cpp server.cpp
-)
-
-# Find Boost libraries (header-only + system)
 find_package(Boost REQUIRED COMPONENTS system)
 
-# Link Boost::system (needed by Asio)
-target_link_libraries(server PRIVATE Boost::system)
+add_library(server
+    server.cpp
+)
 
+target_include_directories(server
+    PUBLIC ${PROJECT_SOURCE_DIR}/include
+)
 
-target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(server
+    PUBLIC Boost::system
+    PUBLIC common
+)
 
-target_link_libraries(server PRIVATE common)
+add_executable(server_app
+    main.cpp
+)
+
+target_link_libraries(server_app
+    PRIVATE server
+)
