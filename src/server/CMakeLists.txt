@@ -1,7 +1,7 @@
 find_package(Boost REQUIRED COMPONENTS system)
 
 add_library(server
-    server.cpp
+    server.cpp session.cpp
 )
 
 target_include_directories(server
