@@ -20,7 +20,7 @@ public:
     void removeSession(std::shared_ptr<Session> session);
 
 private:
-    void handleClient(boost::asio::ip::tcp::socket socket);
+    // void handleClient(boost::asio::ip::tcp::socket socket);
     std::vector<std::shared_ptr<Session>> sessions_;
     std::mutex sessions_mutex_;
 
